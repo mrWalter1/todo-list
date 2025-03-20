@@ -19,15 +19,15 @@ body {
 
 .form-section {
   background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 40px auto 0 40px;
+  padding: 30px;
+  border-radius: 12px;
+  margin: 60px auto 0 60px;
 }
 
 .task-form {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
 }
 
