@@ -1,0 +1,2 @@
+Репозиторий: https://github.com/mrWalter1/todo-list
+Опубликованный сайт: https://mrwalter1.github.io/todo-list/
