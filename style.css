@@ -4,29 +4,30 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  font-size: 0.9rem;
 }
 
 .header-section {
   background-color: #0056b3;
-  width: 100vw;
+  width: 95vw;
   color: white;
-  padding-left: 50px;
+  padding-left: 40px;
   text-align: left;
   box-sizing: border-box;
 }
 
 .form-section {
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 50px auto 0 50px;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 40px auto 0 40px;
 }
 
 .task-form {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -39,22 +40,22 @@ body {
 
 .task-input {
   width: 100%;
-  padding: 10px;
-  height: 3rem;
+  padding: 8px;
+  height: 2.5rem;
   border: 1px solid #ccc;
-  border-radius: 7px;
+  border-radius: 5px;
   box-sizing: border-box;
   grid-row: 2;
 }
 
 .add-task-btn {
-  height: 3rem;
+  height: 2.5rem;
   background-color: #0056b3;
   color: white;
   border: none;
-  border-radius: 7px;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 10px 25px;
+  padding: 8px 20px;
   grid-row: 2;
 }
 
@@ -66,9 +67,9 @@ body {
 .tasks-section {
   display: flex;
   justify-content: space-between;
-  margin-left: 30px;
-  margin-right: 50px;
-  width: calc(100% - 50px);
+  margin-left: 20px;
+  margin-right: 40px;
+  width: calc(100% - 60px);
 }
 
 .task-category {
@@ -76,10 +77,10 @@ body {
 }
 
 .category-title {
-  border-radius: 10px;
+  border-radius: 8px;
   width: fit-content;
-  padding: 10px 15px;
-  margin-bottom: 10px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
   background-color: var(--category-bg-color);
   color: var(--category-text-color);
 }
@@ -87,10 +88,11 @@ body {
 .task-item {
   list-style: none;
   background: white;
-  padding: 20px;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  border-left: 5px solid var(--category-text-color);
+  padding: 15px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  border-left: 4px solid var(--category-text-color);
+  font-size: 0.9rem;
 }
 
 .pending {
@@ -117,9 +119,9 @@ body {
   background-color: #c82333;
   color: white;
   border: none;
-  border-radius: 7px;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 15px;
+  padding: 12px;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 8px;
 }
