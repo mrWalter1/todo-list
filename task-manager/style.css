@@ -1,0 +1,159 @@
+/* === Общие стили === */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Casual", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eef4fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+/* === Заголовок === */
+.board-app__header {
+  background-color: #0056b3;
+  width: 100%;
+  color: white;
+  padding: 20px;
+  text-align: left;
+}
+
+.board-app__header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.add-task {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Смещаем влево */
+  margin: 20px 0 20px 20px; /* Добавлен отступ слева */
+}
+
+.add-task__form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Увеличен отступ между заголовком и полем */
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.add-task__input-wrapper {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.add-task__input-wrapper input {
+  flex-grow: 1;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-task__button {
+  padding: 12px 25px;
+  background-color: #0056b3;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+/* === Доска задач === */
+.taskboard {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1400px;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* === Колонки задач === */
+.task-category {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+}
+
+/* === Заголовки категорий === */
+.category-title {
+  background-color: #e3e3e3;
+  color: #6c757d;
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* === Карточки задач === */
+.task-item {
+  background: white;
+  padding: 18px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-left: 5px solid #6c757d;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  list-style: none; /* Убираем точки */
+}
+
+/* === Цвета для категорий === */
+.pending {
+  --category-bg-color: #e3e3e3;
+  --category-text-color: #6c757d;
+}
+
+.in-progress {
+  --category-bg-color: #cde0ff;
+  --category-text-color: #3069c7;
+}
+
+.completed {
+  --category-bg-color: #ccf2d1;
+  --category-text-color: #5aaf5a;
+}
+
+.discarded {
+  --category-bg-color: #f9d6d6;
+  --category-text-color: #b84d50;
+}
+
+/* === Применение стилей к категориям === */
+.pending .category-title,
+.in-progress .category-title,
+.completed .category-title,
+.discarded .category-title {
+  background-color: var(--category-bg-color);
+  color: var(--category-text-color);
+}
+
+.pending .task-item,
+.in-progress .task-item,
+.completed .task-item,
+.discarded .task-item {
+  border-left-color: var(--category-text-color);
+}
