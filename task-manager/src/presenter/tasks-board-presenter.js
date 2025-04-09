@@ -1,0 +1,83 @@
+import TaskBoardComponent from '../view/task-board-component.js';
+import TaskListComponent from '../view/task-list-component.js';
+import TaskComponent from '../view/task-component.js';
+import ClearBasketComponent from '../view/clear-basket-component.js';
+import { render } from '../framework/render.js';
+import { Status, StatusLabel } from '../const.js';
+import PlaceholderComponent from '../view/placeholder-component.js';
+
+export default class TasksBoardPresenter {
+  #boardContainer = null;
+  #tasksModel = null;
+  #tasksBoardComponent = new TaskBoardComponent();
+  #boardTasks = [];
+
+  constructor({ boardContainer, tasksModel }) {
+    this.#boardContainer = boardContainer;
+    this.#tasksModel = tasksModel;
+  }
+
+  // Отрисовка отдельной задачи
+  #renderTask(task, container) {
+    const taskComponent = new TaskComponent({ task });
+    render(taskComponent, container);
+  }
+
+  // Отрисовка списка задач по статусу
+  #renderTasksList(status, container) {
+    const tasksForStatus = this.#boardTasks.filter(task => task.status === status);
+    if (tasksForStatus.length === 0) {
+      this.#renderPlaceholder(container);
+    } else {
+      tasksForStatus.forEach(task => {
+        this.#renderTask(task, container);
+      });
+    }
+  }
+
+  // Отрисовка компонента-заглушки при отсутствии задач
+  #renderPlaceholder(container) {
+    const placeholderComponent = new PlaceholderComponent();
+    render(placeholderComponent, container);
+  }
+
+  // Отрисовка списка задач для корзины, с кнопкой очистки
+  #renderBasket() {
+    const basketList = new TaskListComponent({
+      title: StatusLabel[Status.BASKET],
+      statusClass: Status.BASKET,
+    });
+    render(basketList, this.#tasksBoardComponent.element);
+  
+    // Сначала отрисовываем задачи корзины
+    this.#renderTasksList(Status.BASKET, basketList.element);
+  
+    // Затем отрисовываем кнопку очистки корзины — она появится ниже задач
+    const clearBasketComponent = new ClearBasketComponent();
+    render(clearBasketComponent, basketList.element);
+  }
+  
+
+  // Отрисовка доски задач
+  #renderBoard() {
+    render(this.#tasksBoardComponent, this.#boardContainer);
+
+    Object.values(Status).forEach((status) => {
+      if (status === Status.BASKET) {
+        this.#renderBasket();
+      } else {
+        const taskListComponent = new TaskListComponent({
+          title: StatusLabel[status],
+          statusClass: status,
+        });
+        render(taskListComponent, this.#tasksBoardComponent.element);
+        this.#renderTasksList(status, taskListComponent.element);
+      }
+    });
+  }
+
+  init() {
+    this.#boardTasks = [...this.#tasksModel.tasks];
+    this.#renderBoard();
+  }
+}
