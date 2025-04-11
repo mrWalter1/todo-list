@@ -23,7 +23,7 @@ export default class TasksBoardPresenter {
     render(taskComponent, container);
   }
 
-  // Отрисовка списка задач по статусу
+  // Отрисовка списка задач по статусу 
   #renderTasksList(status, container) {
     const tasksForStatus = this.#boardTasks.filter(task => task.status === status);
     if (tasksForStatus.length === 0) {
@@ -35,41 +35,29 @@ export default class TasksBoardPresenter {
     }
   }
 
-  // Отрисовка компонента-заглушки при отсутствии задач
+  // Отрисовка заглушки когда нет задач
   #renderPlaceholder(container) {
     const placeholderComponent = new PlaceholderComponent();
     render(placeholderComponent, container);
   }
 
-  // Отрисовка списка задач для корзины, с кнопкой очистки
-  #renderBasket() {
-    const basketList = new TaskListComponent({
-      title: StatusLabel[Status.BASKET],
-      statusClass: Status.BASKET,
-    });
-    render(basketList, this.#tasksBoardComponent.element);
-  
-    this.#renderTasksList(Status.BASKET, basketList.element);
-  
-    const clearBasketComponent = new ClearBasketComponent();
-    render(clearBasketComponent, basketList.element);
-  }
-  
-
   // Отрисовка доски задач
   #renderBoard() {
     render(this.#tasksBoardComponent, this.#boardContainer);
 
-    Object.values(Status).forEach((status) => {
+    Object.values(Status).forEach(status => {
+      const taskListComponent = new TaskListComponent({
+        title: StatusLabel[status],
+        statusClass: status,
+      });
+      render(taskListComponent, this.#tasksBoardComponent.element);
+
+      this.#renderTasksList(status, taskListComponent.element);
+
+      // кнопка очистки после задач
       if (status === Status.BASKET) {
-        this.#renderBasket();
-      } else {
-        const taskListComponent = new TaskListComponent({
-          title: StatusLabel[status],
-          statusClass: status,
-        });
-        render(taskListComponent, this.#tasksBoardComponent.element);
-        this.#renderTasksList(status, taskListComponent.element);
+        const clearBasketComponent = new ClearBasketComponent();
+        render(clearBasketComponent, taskListComponent.element);
       }
     });
   }
