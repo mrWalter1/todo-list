@@ -68,14 +68,13 @@ export default class TasksBoardPresenter {
       render(listComponent, this.#boardComponent.element);
       this.#renderTasksList(status, listComponent.element);
 
-      if (status === Status.BASKET) {
+      if (status === Status.BASKET && this.#tasksModel.hasBasketTasks()) {
         const clearBtn = new ClearBasketComponent({
-          onClick: this.#handleClearBasketClick.bind(this)
-        });
+         onClick: this.#handleClearBasketClick.bind(this)
+       });
         render(clearBtn, listComponent.element);
         this.#resetButtonComponent = clearBtn;
-        clearBtn.toggleDisabled(!this.#tasksModel.hasBasketTasks());
-      }
+       }
     });
   }
 
@@ -101,7 +100,7 @@ export default class TasksBoardPresenter {
 
   // 7) Создание новой задачи из формы
   async createTask() {
-    const input = document.querySelector('#add-task');
+    const input = document.querySelector('.add-task__form #add-task');
     const title = input.value.trim();
     if (!title) return;
     try {
